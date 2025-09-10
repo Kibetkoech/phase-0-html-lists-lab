@@ -1,10 +1,9 @@
 const fs = require("fs");
 const path = require("path");
-const globalJsdom = require("global-jsdom");
+const { JSDOM } = require("jsdom");
 
-const html = fs.readFileSync(
-  path.resolve(__dirname, "..", "index.html"),
-  "utf-8"
-);
+const html = fs.readFileSync(path.resolve(__dirname, "..", "index.html"), "utf8");
+const dom = new JSDOM(html);
 
-globalJsdom(html);
+global.window = dom.window;
+global.document = dom.window.document;

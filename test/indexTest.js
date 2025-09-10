@@ -41,12 +41,14 @@ describe("the <ul> tag", () => {
       <ul>
         <li>
           4 slices of cheese
-          <ul></ul>
+      
         </li>
       </ul>
     `;
 
-    expect(ul, hint).to.have.descendant("li > ul");
+    // Fix: Use querySelector to find the nested <ul>
+    const nestedUl = ul.querySelector("li > ul");
+    expect(nestedUl, hint).to.exist;
   });
 
   it("contains three <li> nested within the nested <ul> with the correct content", () => {
